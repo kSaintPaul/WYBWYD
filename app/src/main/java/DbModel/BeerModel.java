@@ -53,4 +53,32 @@ public class BeerModel {
                 ,nullColumnHack
                 ,contentValues);
     }
+
+    public int DeleteBeer(Beer beer){
+        return DeleteBeer(beer.Id);
+    }
+
+    public int DeleteBeer(Integer idBeer){
+        return db.delete(
+                DbHelper.Table_Beer
+                ,"id = ?"
+                ,new String[]{String.valueOf(idBeer)});
+    }
+
+    public int UpdateBeer(Beer beer){
+        ContentValues contentValues = Beer.ToContentValues(beer);
+
+        return db.update(DbHelper.Table_Beer,
+                contentValues,
+                "id = ?",
+                new String[]{String.valueOf(beer.Id)});
+    }
+
+    public int UpdateBeer(Integer idBeer, ContentValues contentValues){
+
+        return db.update(DbHelper.Table_Beer,
+                contentValues,
+                "id = ?",
+                new String[]{String.valueOf(idBeer)});
+    }
 }

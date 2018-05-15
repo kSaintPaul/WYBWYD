@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Beer {
-    public String Id;
+    public Integer Id;
     public String Nom;
     public String Desc;
     public Float Alc;
@@ -29,7 +29,7 @@ public class Beer {
         while(cursor.moveToNext()){
             beer = new Beer();
 
-            beer.Id = cursor.getString(cursor.getColumnIndex("id"));
+            beer.Id = cursor.getInt(cursor.getColumnIndex("id"));
             beer.Nom = cursor.getString(cursor.getColumnIndex("nom"));
             beer.Desc = cursor.getString(cursor.getColumnIndex("desc"));
             beer.Alc = cursor.getFloat(cursor.getColumnIndex("alc"));
@@ -43,20 +43,7 @@ public class Beer {
     }
 
     public static Beer GetBeerByCursor(Cursor cursor){
-        Beer beer = new Beer();
-
-        while(cursor.moveToNext()){
-            beer = new Beer();
-
-            beer.Id = cursor.getString(cursor.getColumnIndex("id"));
-            beer.Nom = cursor.getString(cursor.getColumnIndex("nom"));
-            beer.Desc = cursor.getString(cursor.getColumnIndex("desc"));
-            beer.Alc = cursor.getFloat(cursor.getColumnIndex("alc"));
-            beer.Price = cursor.getFloat(cursor.getColumnIndex("price"));
-
-        }
-
-        return beer;
+        return GetBeersByCursor(cursor).get(0);
     }
 
     public static ContentValues ToContentValues(Beer beer){
